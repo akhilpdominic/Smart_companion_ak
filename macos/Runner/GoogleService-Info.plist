@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>769355333776-89ecm5bndqu2kpbkm176rhejau4flf9e.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.769355333776-89ecm5bndqu2kpbkm176rhejau4flf9e</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDuRJjYeRZR21W0aw6H8dvKF0z2uGUgkLE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>769355333776</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.studyManage</string>
+	<key>PROJECT_ID</key>
+	<string>smart-study-companion</string>
+	<key>STORAGE_BUCKET</key>
+	<string>smart-study-companion.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:769355333776:ios:57eb274ce18bfaab179815</string>
+	<key>DATABASE_URL</key>
+	<string>https://smart-study-companion-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>
