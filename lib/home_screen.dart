@@ -25,7 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => OverviewScreen(), // Pass the Firestore value here
+          builder: (context) => OverviewScreen(
+            drowsyArray: [],
+          ), // Pass the Firestore value here
         ),
       );
     } else if (index == 2) {

@@ -55,14 +55,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'My App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: OverviewScreen(
-        )
-        // home: LoginScreen(),
-        //home: const HomeScreen(userName: 'John',),
-        );
+      title: 'My App',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+
+      home: LoginScreen(),
+      //home: const HomeScreen(userName: 'John',),
+    );
   }
 }
