@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:study_manage/home_screen.dart';
 
 class UserInfoPage extends StatefulWidget {
   @override
@@ -7,6 +9,7 @@ class UserInfoPage extends StatefulWidget {
 }
 
 class _UserInfoPageState extends State<UserInfoPage> {
+  final _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   String? _selectedClass;
@@ -84,7 +87,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
     }
 
     try {
-      await _firestore.collection('users').add({
+      await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
         'name': name,
         'age': _selectedAge,
         'sex': _selectedSex,
@@ -100,7 +103,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>HomeScreen(userName: name)));
                 },
                 child: Text('OK'),
               ),
@@ -114,8 +117,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
         builder: (context) {
           return AlertDialog(
             title: Text('Error'),
-            content:
-                Text('Failed to add user information. Please try again.'),
+            content: Text('Failed to add user information. Please try again.'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -136,97 +138,99 @@ class _UserInfoPageState extends State<UserInfoPage> {
       appBar: AppBar(
         title: Text('User Information'),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Name:',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 8),
-            TextField(
-              controller: _nameController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Name:',
+                style: TextStyle(fontSize: 16),
               ),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Age:',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 8),
-            DropdownButtonFormField<String>(
-              value: _selectedAge,
-              items: _ageList.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String? value) {
-                setState(() {
-                  _selectedAge = value;
-                });
-              },
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
+              SizedBox(height: 8),
+              TextField(
+                controller: _nameController,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Sex:',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 8),
-            DropdownButtonFormField<String>(
-              value: _selectedSex,
-              items: _sexList.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String? value) {
-                setState(() {
-                  _selectedSex = value;
-                });
-              },
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
+              SizedBox(height: 16),
+              Text(
+                'Age:',
+                style: TextStyle(fontSize: 16),
               ),
-            ),
-            SizedBox(height: 16),
-            Text(
-              'Class:',
-              style: TextStyle(fontSize: 16),
-            ),
-            SizedBox(height: 8),
-            DropdownButtonFormField<String>(
-              value: _selectedClass,
-              items: _classList.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-              onChanged: (String? value) {
-                setState(() {
-                  _selectedClass = value;
-                });
-              },
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
+              SizedBox(height: 8),
+              DropdownButtonFormField<String>(
+                value: _selectedAge,
+                items: _ageList.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (String? value) {
+                  setState(() {
+                    _selectedAge = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
               ),
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: _submitUserInfo,
-              child: Text('Submit'),
-            ),
-          ],
+              SizedBox(height: 16),
+              Text(
+                'Sex:',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 8),
+              DropdownButtonFormField<String>(
+                value: _selectedSex,
+                items: _sexList.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (String? value) {
+                  setState(() {
+                    _selectedSex = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Class:',
+                style: TextStyle(fontSize: 16),
+              ),
+              SizedBox(height: 8),
+              DropdownButtonFormField<String>(
+                value: _selectedClass,
+                items: _classList.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (String? value) {
+                  setState(() {
+                    _selectedClass = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: _submitUserInfo,
+                child: Text('Submit'),
+              ),
+            ],
+          ),
         ),
       ),
     );

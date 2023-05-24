@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_manage/user_info_page.dart';
 import 'overview_screen.dart';
 import 'live_stream_screen.dart';
 
@@ -13,6 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  List<dynamic> drowsyArray = []; // Add this line to store the Firestore value
 
   void _onItemTapped(int index) {
     setState(() {
@@ -23,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => OverviewScreen(userName: widget.userName),
+          builder: (context) => OverviewScreen(), // Pass the Firestore value here
         ),
       );
     } else if (index == 2) {

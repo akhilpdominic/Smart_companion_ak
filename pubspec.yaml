@@ -40,8 +40,11 @@ dependencies:
   firebase_auth: ^4.6.1
   google_sign_in: ^6.1.0
   cloud_firestore: ^4.7.1
-  fl_chart: ^0.62.0
+  charts_flutter: ^0.11.0
   video_player: ^2.6.1
+  graphic: ^2.2.0
+  fl_chart: ^0.62.0
+
   
 
 dev_dependencies:

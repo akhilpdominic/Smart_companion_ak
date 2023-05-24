@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:study_manage/user_info_page.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -13,15 +14,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<UserCredential?> _signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication googleAuth = await googleSignInAccount!.authentication;
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+      final GoogleSignInAuthentication googleAuth =
+          await googleSignInAccount!.authentication;
 
       final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
 
-      final UserCredential userCredential = await _auth.signInWithCredential(credential);
+      final UserCredential userCredential =
+          await _auth.signInWithCredential(credential);
       return userCredential;
     } catch (e) {
       // Handle sign-in error
@@ -45,7 +49,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 _signInWithGoogle().then((userCredential) {
                   if (userCredential != null) {
                     // Handle successful sign-in
-                    print('Successfully signed in with Google. User: ${userCredential.user}');
+                    print(
+                        'Successfully signed in with Google. User: ${userCredential.user}');
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => UserInfoPage()));
                   }
                 });
               },
@@ -54,12 +61,12 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 16),
             // Add other sign-in options here
             // For example, a button to sign in with email and password
-            ElevatedButton(
-              onPressed: () {
-                // Handle sign-in with email and password
-              },
-              child: Text('Sign in with Email'),
-            ),
+            // ElevatedButton(
+            //   onPressed: () {
+            //     // Handle sign-in with email and password
+            //   },
+            //   child: Text('Sign in with Email'),
+            // ),
             // You can add more buttons for other sign-in providers as needed
           ],
         ),

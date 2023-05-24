@@ -1,18 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class OverviewScreen extends StatefulWidget {
-  final String userName;
-  //final List<int> drowsy_val;
-
-  const OverviewScreen({required this.userName});
-
   @override
   _OverviewScreenState createState() => _OverviewScreenState();
 }
 
 class _OverviewScreenState extends State<OverviewScreen> {
   int _selectedIndex = 1;
+  List<dynamic> drowsyArray = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchDataFromFirebase();
+  }
+
+  void fetchDataFromFirebase() async {
+    DatabaseReference ref = FirebaseDatabase.instance.ref("/");
+    DatabaseReference child = ref.child("drowsy");
+
+    DataSnapshot snapshot = await child.get();
+    if (snapshot.exists) {
+      var data = snapshot.value!;
+      setState(() {
+        drowsyArray = (data as Map)["drowsy_array"];
+      });
+    } else {
+      print('No data available.');
+    }
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -28,37 +46,25 @@ class _OverviewScreenState extends State<OverviewScreen> {
         title: Text('Overview'),
       ),
       body: Center(
-        child: LineChart(
-          LineChartData(
-            lineBarsData: [
-              LineChartBarData(
-                spots: [
-                  FlSpot(0, 10),
-                  FlSpot(1, 15),
-                  FlSpot(2, 12),
-                  // Add more data points for other months
-                ],
-                isCurved: true,
-                // colors: [
-                //   GradientColor(
-                //     gradientFrom: Offset(0.5, 0),
-                //     gradientTo: Offset(0.5, 1),
-                //     colorStops: [0.0, 0.5, 1.0],
-                //     colors: [Colors.blue, Colors.green, Colors.yellow],
-                //   ),
-                // ],
-                barWidth: 4,
-                dotData: FlDotData(show: false),
-                belowBarData: BarAreaData(show: false),
-              ),
-            ],
-            minY: 0,
-            titlesData: FlTitlesData(),
-            // axisTitleData: FlAxisTitleData(),
-            gridData: FlGridData(),
-            borderData: FlBorderData(),
-          ),
-        ),
+        child: drowsyArray.isNotEmpty
+            ? PieChart(
+                PieChartData(
+                  sections: List.generate(
+                    drowsyArray.length,
+                    (index) {
+                      double value = drowsyArray[index].toDouble(); // Convert int to double
+                      Color color = Colors.accents[index % Colors.accents.length];
+                      return PieChartSectionData(
+                        value: value,
+                        color: color,
+                        title: '${value.toStringAsFixed(1)}%',
+                        radius: 80,
+                      );
+                    },
+                  ),
+                ),
+              )
+            : CircularProgressIndicator(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
