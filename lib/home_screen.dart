@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:study_manage/piechart.dart';
 import 'package:study_manage/user_info_page.dart';
 import 'overview_screen.dart';
 import 'live_stream_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final String userName;
-
-  const HomeScreen({required this.userName});
+  final List<dynamic> drowsyArrayh;
+  final List<dynamic> yawnArrayh;
+  const HomeScreen(
+      {required this.userName,
+      required this.drowsyArrayh,
+      required this.yawnArrayh});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -22,14 +27,14 @@ class _HomeScreenState extends State<HomeScreen> {
     });
 
     if (index == 1) {
-      Navigator.push(
+      /*Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => OverviewScreen(
             drowsyArray: [],
           ), // Pass the Firestore value here
         ),
-      );
+      );*/
     } else if (index == 2) {
       Navigator.push(
         context,
@@ -61,7 +66,11 @@ class _HomeScreenState extends State<HomeScreen> {
           Center(
             child: ElevatedButton(
               onPressed: () {
-                // Add your action here
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (context) => HomePage(
+                          drowsyArray: widget.drowsyArrayh,
+                          yawnArray: widget.yawnArrayh,
+                        )));
               },
               child: Text('Start Tracking ${widget.userName}'),
             ),

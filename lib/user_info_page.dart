@@ -4,6 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:study_manage/home_screen.dart';
 
 class UserInfoPage extends StatefulWidget {
+  final List<dynamic> drowsyArrayu;
+  final List<dynamic> yawnArrayu;
+  const UserInfoPage({required this.drowsyArrayu, required this.yawnArrayu});
   @override
   _UserInfoPageState createState() => _UserInfoPageState();
 }
@@ -103,7 +106,12 @@ class _UserInfoPageState extends State<UserInfoPage> {
             actions: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context)=>HomeScreen(userName: name)));
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => HomeScreen(
+                            userName: name,
+                            drowsyArrayh: widget.drowsyArrayu,
+                            yawnArrayh: widget.yawnArrayu,
+                          )));
                 },
                 child: Text('OK'),
               ),

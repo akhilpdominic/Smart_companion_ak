@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-
-int count = 0;
+import 'package:study_manage/piechart.dart';
 
 class OverviewScreen extends StatefulWidget {
-  final List<dynamic> drowsyArray;
+  final Object? drowsyArray;
+  final Object? yawnArray;
 
-  const OverviewScreen({required this.drowsyArray});
+  const OverviewScreen({required this.drowsyArray, this.yawnArray});
 
   @override
   _OverviewScreenState createState() => _OverviewScreenState();
@@ -14,6 +14,40 @@ class OverviewScreen extends StatefulWidget {
 
 class _OverviewScreenState extends State<OverviewScreen> {
   int _selectedIndex = 1;
+
+  double get_drowsy_percentage() {
+    int count = 0, n = 0;
+    print(widget.yawnArray);
+    if (widget.drowsyArray != null) {
+      for (var item in widget.drowsyArray as List<Object?>) {
+        if (item != null) {
+          if (item == 1) count++;
+          n++;
+        }
+      }
+    }
+
+    //print("percentage drowsy : " + (count * 100 / n).toString());
+    return count * 100 / n;
+  }
+
+  double get_yawn_percentage() {
+    int count = 0, n = 0;
+    //print(widget.yawnArray);
+    if (widget.yawnArray != null) {
+      for (var item in widget.yawnArray as List<Object?>) {
+        if (item != null) {
+          if (item == 1) {
+            count++;
+          }
+          n++;
+        }
+      }
+    }
+    //print('object is yawn ' + n.toString());
+    //print("percentage yawn : " + (count * 100 / n).toString());
+    return count * 100 / n;
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -24,39 +58,13 @@ class _OverviewScreenState extends State<OverviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double dd = get_drowsy_percentage(), yy = get_yawn_percentage();
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Overview'),
       ),
-      body: Center(
-        child: LineChart(
-          LineChartData(
-            lineBarsData: [
-              LineChartBarData(
-                spots: [
-                  FlSpot(0, 1),
-                  FlSpot(1, 1),
-                  FlSpot(2, 0),
-                  FlSpot(3, 0),
-                  FlSpot(4, 0),
-                  FlSpot(5, 1),
-                  FlSpot(6, 1),
-                  FlSpot(7, 0),
-                  FlSpot(8, 1),
-                ],
-                isCurved: true,
-                barWidth: 4,
-                dotData: FlDotData(show: false),
-                belowBarData: BarAreaData(show: false),
-              ),
-            ],
-            minY: 0,
-            titlesData: FlTitlesData(),
-            gridData: FlGridData(),
-            borderData: FlBorderData(),
-          ),
-        ),
-      ),
+      body: Text("hello"),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
