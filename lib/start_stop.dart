@@ -10,7 +10,10 @@ class StartStop extends StatefulWidget {
   var yawnArray;
   var timestamp;
   StartStop(
-      {super.key, required this.drowsyArray, this.yawnArray, this.timestamp});
+      {super.key,
+      required this.drowsyArray,
+      this.yawnArray,
+      required this.timestamp});
 
   @override
   State<StartStop> createState() => _StartStopState();
@@ -96,6 +99,7 @@ class _StartStopState extends State<StartStop> {
                                     builder: (context) => MyWidget(
                                           drowsyArray: widget.drowsyArray,
                                           yawnArray: widget.yawnArray,
+                                          timestamp: widget.timestamp,
                                         )));
                           },
                           child: const Text('OK'),
@@ -117,15 +121,18 @@ class _StartStopState extends State<StartStop> {
             ElevatedButton(
               onPressed: () async {
                 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-                /*var dd = get_drowsy_percentage(),
+                var dd = get_drowsy_percentage(),
                     yy = get_yawn_percentage(),
-                    ts = widget.timestamp;*/
-                await _firestore.collection('UserData').doc('Akhil').set({
-                  'Attentive': (100 - 78 - 45),
-                  'Drowsy': (34),
+                    ts = widget.timestamp;
+                await _firestore
+                    .collection('UserData')
+                    .doc(currenttime.toString())
+                    .set({
+                  'Attentive': (100 - dd - yy),
+                  'Drowsy': (dd),
                   'endtime': (currenttime),
-                  'yawn': (23),
-                  'startime': 0
+                  'yawn': (yy),
+                  'Duration': ts
                 });
 
                 Navigator.push(
@@ -134,6 +141,7 @@ class _StartStopState extends State<StartStop> {
                         builder: (context) => MyWidget(
                               drowsyArray: widget.drowsyArray,
                               yawnArray: widget.yawnArray,
+                              timestamp: widget.timestamp,
                             )));
                 ;
               },

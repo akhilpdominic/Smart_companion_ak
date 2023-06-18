@@ -20,12 +20,12 @@ class HomePageState extends State<HomePage> {
   double get_drowsy_percentage() {
     //print("percentage drowsy : " + (count * 100 / n).toString());
     //print((widget.drowsyArray + 1) * 100 / (widget.timestamp + 1));
-    return (31 + 1) * 100 / (23 + 1);
+    return (widget.drowsyArray) * 100 / (widget.timestamp);
   }
 
   double get_yawn_percentage() {
     //print((widget.yawnArray + 1) * 100 / (widget.timestamp + 1));
-    return (31 + 1) * 100 / (23 + 1);
+    return (widget.yawnArray) * 100 / (widget.timestamp);
   }
 
   final dataMap = <String, double>{};

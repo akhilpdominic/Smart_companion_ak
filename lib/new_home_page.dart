@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pie_chart/pie_chart.dart';
 import 'package:study_manage/devInfo.dart';
+import 'package:study_manage/history.dart';
 import 'package:study_manage/live_stream_screen.dart';
 import 'package:study_manage/piechart.dart';
 import 'package:study_manage/start_stop.dart';
@@ -8,9 +9,12 @@ import 'package:study_manage/start_stop.dart';
 class MyWidget extends StatefulWidget {
   var drowsyArray;
   var yawnArray;
-  var timestamp;
+  double timestamp;
   MyWidget(
-      {super.key, required this.drowsyArray, this.yawnArray, this.timestamp});
+      {super.key,
+      required this.drowsyArray,
+      this.yawnArray,
+      required this.timestamp});
 
   @override
   State<MyWidget> createState() => _MyWidgetState();
@@ -36,7 +40,7 @@ class _MyWidgetState extends State<MyWidget> {
                 SizedBox(
                   height: 60,
                 ),
-                Text("Have a great Day!",
+                Text("Hello There...",
                     style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
@@ -94,7 +98,7 @@ class _MyWidgetState extends State<MyWidget> {
                           child: Column(
                             children: [
                               Icon(
-                                Icons.alarm_add,
+                                Icons.analytics,
                                 size: 100,
                               ),
                               Text('Monitor')
@@ -116,7 +120,7 @@ class _MyWidgetState extends State<MyWidget> {
                           child: Column(
                             children: [
                               Icon(
-                                Icons.history,
+                                Icons.video_call,
                                 size: 100,
                               ),
                               Text('Livestream')
@@ -129,7 +133,7 @@ class _MyWidgetState extends State<MyWidget> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LiveStreamScreen()))
+                                      builder: (context) => firestoreTest()))
                               //FirebaseAuth.instance.signOut()
                             }),
                         child: Container(
@@ -139,10 +143,10 @@ class _MyWidgetState extends State<MyWidget> {
                           child: Column(
                             children: [
                               Icon(
-                                Icons.developer_mode,
+                                Icons.history,
                                 size: 100,
                               ),
-                              Text("Developer info")
+                              Text("Previous Data")
                             ],
                           ),
                         ),

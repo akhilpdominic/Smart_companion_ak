@@ -16,7 +16,6 @@ void main() async {
   FirebaseDatabase database = FirebaseDatabase.instance;
   DatabaseReference ref = FirebaseDatabase.instance.ref("/");
   DatabaseReference child = ref.child("drowsy");
-  print("\n\n\n\n\n\n\n\n\nHello\n\n\n\n\n\n\n\n");
 
   final snapshot = await ref.child('drowsy').get();
   final snapshot1 = await ref.child('yawn').get();
@@ -26,6 +25,9 @@ void main() async {
     var data1 = snapshot.value!;
     var data2 = snapshot1.value!;
     var data3 = snapshot2.value!;
+
+    print(data1);
+    print(data2);
     //print(data2);
     // Use the value variable here or perform any necessary operations
     // Example:
@@ -39,9 +41,9 @@ void main() async {
     runApp(MyApp(arr1: drowsyArray, arr2: yawnArray, arr3: tsarray));
   } else {
     runApp(const MyApp(
-      arr1: 1,
-      arr2: 1,
-      arr3: 1,
+      arr1: 5,
+      arr2: 5,
+      arr3: 5,
     ));
     print('No data available.');
   }
@@ -74,7 +76,7 @@ class MyApp extends StatelessWidget {
       home: MyWidget(
         drowsyArray: arr1,
         yawnArray: arr2,
-        timestamp: arr3,
+        timestamp: arr3.toDouble(),
       ),
 
       //home: const HomeScreen(userName: 'John',),
