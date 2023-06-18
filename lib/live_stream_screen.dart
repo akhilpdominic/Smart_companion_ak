@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class LiveStreamScreen extends StatefulWidget {
+  const LiveStreamScreen({super.key});
+
   @override
   _LiveStreamScreenState createState() => _LiveStreamScreenState();
 }
@@ -34,7 +36,7 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Live Stream'),
+        title: const Text('Live Stream'),
       ),
       body: Center(
         child: FutureBuilder(
@@ -46,7 +48,7 @@ class _LiveStreamScreenState extends State<LiveStreamScreen> {
                 child: VideoPlayer(_controller),
               );
             } else {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             }
           },
         ),

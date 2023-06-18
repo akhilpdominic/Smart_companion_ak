@@ -6,7 +6,8 @@ import 'package:study_manage/user_info_page.dart';
 class LoginScreen extends StatefulWidget {
   final List<dynamic> drowsyArrayl;
   final List<dynamic> yawnArrayl;
-  const LoginScreen({required this.drowsyArrayl, required this.yawnArrayl});
+  const LoginScreen(
+      {super.key, required this.drowsyArrayl, required this.yawnArrayl});
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -21,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
           await _googleSignIn.signIn();
       final GoogleSignInAuthentication googleAuth =
           await googleSignInAccount!.authentication;
+      print("here\n\n\n\n\n\n\n\n\n\n\n\n");
 
       final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
@@ -41,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: Center(
         child: Column(
@@ -49,22 +51,31 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             ElevatedButton(
               onPressed: () {
+                print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                 _signInWithGoogle().then((userCredential) {
                   if (userCredential != null) {
                     // Handle successful sign-in
                     print(
-                        'Successfully signed in with Google. User: ${userCredential.user}');
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        '\n\n\n\n\n\n\nSuccessfully signed in with Google. User: ${userCredential.user}');
+
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => UserInfoPage(
+                                  drowsyArrayu: widget.drowsyArrayl,
+                                  yawnArrayu: widget.yawnArrayl,
+                                )));
+                    /*Navigator.of(context).pushReplacement(MaterialPageRoute(
                         builder: (context) => UserInfoPage(
                               drowsyArrayu: widget.drowsyArrayl,
                               yawnArrayu: widget.yawnArrayl,
-                            )));
+                            )));*/
                   }
                 });
               },
-              child: Text('Sign in with Google'),
+              child: const Text('Sign in with Google'),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             // Add other sign-in options here
             // For example, a button to sign in with email and password
             // ElevatedButton(

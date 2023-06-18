@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:study_manage/piechart.dart';
-import 'package:study_manage/user_info_page.dart';
-import 'overview_screen.dart';
 import 'live_stream_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,7 +7,7 @@ class HomeScreen extends StatefulWidget {
   final List<dynamic> drowsyArrayh;
   final List<dynamic> yawnArrayh;
   const HomeScreen(
-      {required this.userName,
+      {super.key, required this.userName,
       required this.drowsyArrayh,
       required this.yawnArrayh});
 
@@ -39,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => LiveStreamScreen(),
+          builder: (context) => const LiveStreamScreen(),
         ),
       );
     } else {
@@ -51,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('StudyMate'),
+        title: const Text('StudyMate'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(16.0),
             child: Text(
               'Hi ${widget.userName}\'s Parents',
-              style: TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 24),
             ),
           ),
           Center(

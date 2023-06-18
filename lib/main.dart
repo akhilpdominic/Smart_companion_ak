@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:study_manage/login_screen.dart';
-import 'package:study_manage/overview_screen.dart';
-import 'package:study_manage/piechart.dart';
+import 'package:study_manage/new_home_page.dart';
+import 'package:study_manage/start_stop.dart';
 import 'package:study_manage/user_info_page.dart';
 import 'firebase_options.dart';
 import 'package:firebase_database/firebase_database.dart';
-
-import 'package:syncfusion_flutter_charts/charts.dart';
-import 'home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,37 +20,42 @@ void main() async {
 
   final snapshot = await ref.child('drowsy').get();
   final snapshot1 = await ref.child('yawn').get();
+  final snapshot2 = await ref.child('Timestamp').get();
 
   if (snapshot.exists && snapshot1.exists) {
     var data1 = snapshot.value!;
     var data2 = snapshot1.value!;
+    var data3 = snapshot2.value!;
     //print(data2);
     // Use the value variable here or perform any necessary operations
     // Example:
-    if (data1 != null && data2 != null) {
-      List<dynamic> drowsyArray = (data1 as Map)["drowsy_array"];
-      List<dynamic> yawnArray = (data2 as Map)["yawn_array"];
+    int drowsyArray = (data1 as Map)["drowsy_array"];
+    int yawnArray = (data2 as Map)["yawn_array"];
+    int tsarray = (data3 as Map)["timestampval"];
 
-      print(yawnArray);
-
-      runApp(MyApp(
-        arr1: drowsyArray,
-        arr2: yawnArray,
-      ));
-    }
+    print(yawnArray);
+    print(drowsyArray);
+    print(tsarray);
+    runApp(MyApp(arr1: drowsyArray, arr2: yawnArray, arr3: tsarray));
   } else {
-    runApp(MyApp(
-      arr1: [],
-      arr2: [],
+    runApp(const MyApp(
+      arr1: 1,
+      arr2: 1,
+      arr3: 1,
     ));
     print('No data available.');
   }
 }
 
 class MyApp extends StatelessWidget {
-  final List<dynamic> arr1;
-  final List<dynamic> arr2;
-  const MyApp({required this.arr1, required this.arr2});
+  //final List<dynamic> arr1;
+  //final List<dynamic> arr2;
+
+  final int arr1;
+  final int arr2;
+  final int arr3;
+  const MyApp(
+      {super.key, required this.arr1, required this.arr2, required this.arr3});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -67,7 +69,13 @@ class MyApp extends StatelessWidget {
         yawnArray: arr2,
       ),*/
 
-      home: LoginScreen(drowsyArrayl: arr1, yawnArrayl: arr2),
+      //home: UserInfoPage(drowsyArrayu: arr1, yawnArrayu: arr2),
+
+      home: MyWidget(
+        drowsyArray: arr1,
+        yawnArray: arr2,
+        timestamp: arr3,
+      ),
 
       //home: const HomeScreen(userName: 'John',),
     );

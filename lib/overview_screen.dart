@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:study_manage/piechart.dart';
 
 class OverviewScreen extends StatefulWidget {
   final Object? drowsyArray;
   final Object? yawnArray;
 
-  const OverviewScreen({required this.drowsyArray, this.yawnArray});
+  const OverviewScreen({super.key, required this.drowsyArray, this.yawnArray});
 
   @override
   _OverviewScreenState createState() => _OverviewScreenState();
@@ -62,9 +60,9 @@ class _OverviewScreenState extends State<OverviewScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Overview'),
+        title: const Text('Overview'),
       ),
-      body: Text("hello"),
+      body: const Text("hello"),
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(

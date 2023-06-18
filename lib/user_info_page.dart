@@ -6,7 +6,8 @@ import 'package:study_manage/home_screen.dart';
 class UserInfoPage extends StatefulWidget {
   final List<dynamic> drowsyArrayu;
   final List<dynamic> yawnArrayu;
-  const UserInfoPage({required this.drowsyArrayu, required this.yawnArrayu});
+  const UserInfoPage(
+      {super.key, required this.drowsyArrayu, required this.yawnArrayu});
   @override
   _UserInfoPageState createState() => _UserInfoPageState();
 }
@@ -59,7 +60,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
     '19 years',
   ];
 
-  TextEditingController _nameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   void _submitUserInfo() async {
     final name = _nameController.text;
@@ -73,14 +74,14 @@ class _UserInfoPageState extends State<UserInfoPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Error'),
-            content: Text('Please fill in all the fields.'),
+            title: const Text('Error'),
+            content: const Text('Please fill in all the fields.'),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -90,7 +91,9 @@ class _UserInfoPageState extends State<UserInfoPage> {
     }
 
     try {
-      await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
+      //changed here
+      //await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
+      await _firestore.collection('users').doc('abide').set({
         'name': name,
         'age': _selectedAge,
         'sex': _selectedSex,
@@ -101,8 +104,8 @@ class _UserInfoPageState extends State<UserInfoPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Success'),
-            content: Text('User information added successfully.'),
+            title: const Text('Success'),
+            content: const Text('User information added successfully.'),
             actions: [
               TextButton(
                 onPressed: () {
@@ -113,7 +116,7 @@ class _UserInfoPageState extends State<UserInfoPage> {
                             yawnArrayh: widget.yawnArrayu,
                           )));
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -124,14 +127,15 @@ class _UserInfoPageState extends State<UserInfoPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Error'),
-            content: Text('Failed to add user information. Please try again.'),
+            title: const Text('Error'),
+            content:
+                const Text('Failed to add user information. Please try again.'),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('OK'),
+                child: const Text('OK'),
               ),
             ],
           );
@@ -144,31 +148,31 @@ class _UserInfoPageState extends State<UserInfoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('User Information'),
+        title: const Text('User Information'),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const Text(
                 'Name:',
                 style: TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               TextField(
                 controller: _nameController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 16),
-              Text(
+              const SizedBox(height: 16),
+              const Text(
                 'Age:',
                 style: TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               DropdownButtonFormField<String>(
                 value: _selectedAge,
                 items: _ageList.map((String value) {
@@ -182,16 +186,16 @@ class _UserInfoPageState extends State<UserInfoPage> {
                     _selectedAge = value;
                   });
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 16),
-              Text(
+              const SizedBox(height: 16),
+              const Text(
                 'Sex:',
                 style: TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               DropdownButtonFormField<String>(
                 value: _selectedSex,
                 items: _sexList.map((String value) {
@@ -205,16 +209,16 @@ class _UserInfoPageState extends State<UserInfoPage> {
                     _selectedSex = value;
                   });
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 16),
-              Text(
+              const SizedBox(height: 16),
+              const Text(
                 'Class:',
                 style: TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               DropdownButtonFormField<String>(
                 value: _selectedClass,
                 items: _classList.map((String value) {
@@ -228,14 +232,14 @@ class _UserInfoPageState extends State<UserInfoPage> {
                     _selectedClass = value;
                   });
                 },
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: _submitUserInfo,
-                child: Text('Submit'),
+                child: const Text('Submit'),
               ),
             ],
           ),

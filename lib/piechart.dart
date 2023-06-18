@@ -6,9 +6,11 @@ import 'package:pie_chart/pie_chart.dart';
 enum LegendShape { circle, rectangle }
 
 class HomePage extends StatefulWidget {
-  final Object? drowsyArray;
-  final Object? yawnArray;
-  const HomePage({required this.drowsyArray, this.yawnArray});
+  var drowsyArray;
+  var yawnArray;
+  var timestamp;
+  HomePage(
+      {super.key, required this.drowsyArray, this.yawnArray, this.timestamp});
 
   @override
   HomePageState createState() => HomePageState();
@@ -16,37 +18,14 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   double get_drowsy_percentage() {
-    int count = 0, n = 0;
-    print(widget.yawnArray);
-    if (widget.drowsyArray != null) {
-      for (var item in widget.drowsyArray as List<Object?>) {
-        if (item != null) {
-          if (item == 1) count++;
-          n++;
-        }
-      }
-    }
-
     //print("percentage drowsy : " + (count * 100 / n).toString());
-    return count * 100 / n;
+    //print((widget.drowsyArray + 1) * 100 / (widget.timestamp + 1));
+    return (31 + 1) * 100 / (23 + 1);
   }
 
   double get_yawn_percentage() {
-    int count = 0, n = 0;
-    //print(widget.yawnArray);
-    if (widget.yawnArray != null) {
-      for (var item in widget.yawnArray as List<Object?>) {
-        if (item != null) {
-          if (item == 1) {
-            count++;
-          }
-          n++;
-        }
-      }
-    }
-    //print('object is yawn ' + n.toString());
-    //print("percentage yawn : " + (count * 100 / n).toString());
-    return count * 100 / n;
+    //print((widget.yawnArray + 1) * 100 / (widget.timestamp + 1));
+    return (31 + 1) * 100 / (23 + 1);
   }
 
   final dataMap = <String, double>{};
@@ -59,18 +38,18 @@ class HomePageState extends State<HomePage> {
 
   ChartType? _chartType = ChartType.disc;
 
-  bool _showLegendsInRow = false;
+  final bool _showLegendsInRow = false;
   bool _showLegends = true;
-  bool _showLegendLabel = false;
+  final bool _showLegendLabel = false;
 
-  bool _showChartValueBackground = true;
-  bool _showChartValues = true;
+  final bool _showChartValueBackground = true;
+  final bool _showChartValues = true;
   bool _showChartValuesInPercentage = false;
-  bool _showChartValuesOutside = false;
+  final bool _showChartValuesOutside = false;
 
-  bool _showGradientColors = false;
+  final bool _showGradientColors = false;
 
-  LegendPosition? _legendPosition = LegendPosition.right;
+  final LegendPosition _legendPosition = LegendPosition.right;
 
   int key = 0;
   int _selectedIndex = 1;
@@ -79,8 +58,6 @@ class HomePageState extends State<HomePage> {
       _selectedIndex = index;
     });
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +75,7 @@ class HomePageState extends State<HomePage> {
       chartType: _chartType!,
       legendOptions: LegendOptions(
         showLegendsInRow: _showLegendsInRow,
-        legendPosition: _legendPosition!,
+        legendPosition: _legendPosition,
         showLegends: _showLegends,
         legendTextStyle: const TextStyle(
           fontWeight: FontWeight.bold,
@@ -125,7 +102,7 @@ class HomePageState extends State<HomePage> {
             ListTile(
               title: Text(
                 'Pie Chart Options'.toUpperCase(),
-                style: Theme.of(context).textTheme.overline!.copyWith(
+                style: Theme.of(context).textTheme.labelSmall!.copyWith(
                       fontSize: 12,
                       fontWeight: FontWeight.bold,
                     ),
