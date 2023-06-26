@@ -40,7 +40,7 @@ class _MyWidgetState extends State<MyWidget> {
                 SizedBox(
                   height: 60,
                 ),
-                Text("Hello There...",
+                Text("Hello There!",
                     style: TextStyle(
                       fontSize: 40,
                       fontWeight: FontWeight.bold,
@@ -67,15 +67,19 @@ class _MyWidgetState extends State<MyWidget> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 229, 189, 243),
+                              color: Color.fromARGB(255, 0, 89, 121),
                               borderRadius: BorderRadius.circular(13)),
                           child: Column(
                             children: [
                               Icon(
                                 Icons.pie_chart,
+                                color: Colors.white,
                                 size: 100,
                               ),
-                              Text('Current Session')
+                              Text(
+                                'Current Session',
+                                style: TextStyle(color: Colors.white),
+                              )
                             ],
                           ),
                         ),
@@ -93,15 +97,19 @@ class _MyWidgetState extends State<MyWidget> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 229, 189, 243),
+                              color: Color.fromARGB(255, 0, 89, 121),
                               borderRadius: BorderRadius.circular(13)),
                           child: Column(
                             children: [
                               Icon(
                                 Icons.analytics,
+                                color: Colors.white,
                                 size: 100,
                               ),
-                              Text('Monitor')
+                              Text(
+                                'Monitor',
+                                style: TextStyle(color: Colors.white),
+                              )
                             ],
                           ),
                         ),
@@ -115,15 +123,19 @@ class _MyWidgetState extends State<MyWidget> {
                             }),
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 229, 189, 243),
+                              color: Color.fromARGB(255, 0, 89, 121),
                               borderRadius: BorderRadius.circular(13)),
                           child: Column(
                             children: [
                               Icon(
                                 Icons.video_call,
+                                color: Colors.white,
                                 size: 100,
                               ),
-                              Text('Livestream')
+                              Text(
+                                'Livestream',
+                                style: TextStyle(color: Colors.white),
+                              )
                             ],
                           ),
                         ),
@@ -138,15 +150,19 @@ class _MyWidgetState extends State<MyWidget> {
                             }),
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 229, 189, 243),
+                              color: Color.fromARGB(255, 0, 89, 121),
                               borderRadius: BorderRadius.circular(13)),
                           child: Column(
                             children: [
                               Icon(
                                 Icons.history,
+                                color: Colors.white,
                                 size: 100,
                               ),
-                              Text("Previous Data")
+                              Text(
+                                "Previous Data",
+                                style: TextStyle(color: Colors.white),
+                              )
                             ],
                           ),
                         ),

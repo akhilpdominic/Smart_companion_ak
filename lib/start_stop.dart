@@ -34,7 +34,7 @@ class _StartStopState extends State<StartStop> {
 */
     //print("percentage drowsy : " + (count * 100 / n).toString());
     //print((widget.drowsyArray + 1) * 100 / (widget.timestamp + 1));
-    return (23 + 1) * 100 / (200 + 1);
+    return (widget.drowsyArray) * 100 / (widget.timestamp);
   }
 
   double get_yawn_percentage() {
@@ -53,7 +53,7 @@ class _StartStopState extends State<StartStop> {
     //print('object is yawn ' + n.toString());
     //print("percentage yawn : " + (count * 100 / n).toString());*/
     //print((widget.yawnArray + 1) * 100 / (widget.timestamp + 1));
-    return 49 * 100 / (200 + 1);
+    return widget.yawnArray * 100 / (widget.timestamp);
   }
 
   @override

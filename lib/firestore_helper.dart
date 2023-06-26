@@ -23,12 +23,16 @@ class getFirestoredata extends StatelessWidget {
                 snapshot.data!.data() as Map<String, dynamic>;
 
             return Card(
+              shadowColor: Colors.black,
               child: SizedBox(
                   width: 300,
                   height: 100,
                   child: Text(
                     "Attentiveness: ${data['Attentive']}\nDrowsy: ${data['Drowsy']}\nTimestamp: ${data['Duration']}\nyawn: ${data['yawn']}",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Colors.blue),
                   )),
             );
           }
